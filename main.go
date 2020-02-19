@@ -3,5 +3,6 @@ package main
 import M "GoLoadBalancer/model"
 
 func main(){
-	M.InitInstances()
+	loadBalancer := M.InitLoadBalancer()
+	M.LaunchInstances(loadBalancer)
 }

@@ -6,7 +6,7 @@ type loadBalancer struct {
 	instances	[]*instance
 }
 
-func InitInstances(){
+func InitLoadBalancer() loadBalancer{
 	var myInstances []*instance
 	for i := 0; i < 10 ; i++  {
 		var app = "helloWorld"
@@ -19,17 +19,31 @@ func InitInstances(){
 		anInstance := instance{
 			address: address,
 			app: app,
-			port: 8000 + i}
+			port: string(8000 + i)}
 
 		myInstances = append(myInstances, &anInstance)
 	}
-	//loadBalancer := loadBalancer{instances:myInstances}
-	printInstance(myInstances)
+
+	printInstances(myInstances)
+	loadBalancer := loadBalancer{instances:myInstances}
+
+	return loadBalancer
 }
 
-func printInstance(instances []*instance){
-	for i := 0; i < len(instances); i++ {
-		fmt.Printf("%v", instances[i])
+func printInstances(instances []*instance){
+	for i := range instances {
+		fmt.Printf("%+v \n", *instances[i])
+	}
+}
+
+func LaunchInstances(loadBalancer loadBalancer){
+	instances := loadBalancer.instances
+	for i := range loadBalancer.instances {
+		if instances[i].app == "helloWorld" {
+			launchHelloWorld(*instances[i])
+		}else{
+			launchHelloFrance(*instances[i])
+		}
 	}
 }
 

@@ -2,6 +2,6 @@ package model
 
 type instance struct {
 	app     string
-	port    int
+	port    string
 	address string
 }

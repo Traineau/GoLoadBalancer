@@ -10,9 +10,9 @@ func sayHelloWorld(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, message)
 }
 
-func main2() {
-	http.HandleFunc("/appHelloWorld", sayHelloWorld)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+func launchHelloWorld(instance instance) {
+	http.HandleFunc(instance.address, sayHelloWorld)
+	if err := http.ListenAndServe(instance.port, nil); err != nil {
 		panic(err)
 	}
 }
