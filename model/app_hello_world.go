@@ -1,17 +1,17 @@
-package main
+package model
 
 import (
 	"fmt"
 	"net/http"
 )
 
-func sayHello1(w http.ResponseWriter, r *http.Request) {
+func sayHelloWorld(w http.ResponseWriter, r *http.Request) {
 	message := "Hello World"
 	fmt.Fprintf(w, message)
 }
 
-func main() {
-	http.HandleFunc("/app1", sayHello1)
+func main2() {
+	http.HandleFunc("/appHelloWorld", sayHelloWorld)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}

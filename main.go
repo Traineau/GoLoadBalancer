@@ -1,9 +1,7 @@
 package main
 
-import "GoLoadBalancer/instance"
+import M "GoLoadBalancer/model"
 
 func main(){
-	i := instance.Instance {
-
-	}
+	M.InitInstances()
 }

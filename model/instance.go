@@ -1,11 +1,7 @@
-package main
+package model
 
 type instance struct {
 	app     string
-	port    string
+	port    int
 	address string
-}
-
-func NewInstance(app string, port string, address string) *instance{
-	
 }
