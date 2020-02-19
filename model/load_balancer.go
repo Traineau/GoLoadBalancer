@@ -23,9 +23,14 @@ func InitInstances(){
 
 		myInstances = append(myInstances, &anInstance)
 	}
-	loadBalancer := loadBalancer{instances:myInstances}
+	//loadBalancer := loadBalancer{instances:myInstances}
+	printInstance(myInstances)
+}
 
-	fmt.Printf("%v", *loadBalancer)
+func printInstance(instances []*instance){
+	for i := 0; i < len(instances); i++ {
+		fmt.Printf("%v", instances[i])
+	}
 }
 
 func sendMessages(){
