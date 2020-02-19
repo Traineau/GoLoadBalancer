@@ -3,6 +3,7 @@ package model
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 func sayHelloFrance(w http.ResponseWriter, r *http.Request) {
@@ -11,8 +12,10 @@ func sayHelloFrance(w http.ResponseWriter, r *http.Request) {
 }
 
 func launchHelloFrance(instance instance) {
-	http.HandleFunc(instance.address, sayHelloFrance)
-	if err := http.ListenAndServe(instance.port, nil); err != nil {
+	var port = strconv.Itoa(instance.port)
+	mux := http.NewServeMux()
+	mux.HandleFunc(instance.address, sayHelloFrance)
+	if err := http.ListenAndServe(":" + port, nil); err != nil {
 		panic(err)
 	}
 }

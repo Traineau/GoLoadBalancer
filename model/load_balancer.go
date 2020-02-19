@@ -1,6 +1,9 @@
 package model
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 type loadBalancer struct {
 	instances	[]*instance
@@ -19,7 +22,7 @@ func InitLoadBalancer() loadBalancer{
 		anInstance := instance{
 			address: address,
 			app: app,
-			port: string(8000 + i)}
+			port: 8000 + i}
 
 		myInstances = append(myInstances, &anInstance)
 	}
@@ -39,12 +42,14 @@ func printInstances(instances []*instance){
 func LaunchInstances(loadBalancer loadBalancer){
 	instances := loadBalancer.instances
 	for i := range loadBalancer.instances {
+		time.Sleep(100 * time.Millisecond)
 		if instances[i].app == "helloWorld" {
-			launchHelloWorld(*instances[i])
+			go launchHelloWorld(*instances[i])
 		}else{
-			launchHelloFrance(*instances[i])
+			go launchHelloFrance(*instances[i])
 		}
 	}
+	time.Sleep(10000 * time.Hour)
 }
 
 func sendMessages(){
